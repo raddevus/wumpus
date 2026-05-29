@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="wumpus.Tests/wumpus.Tests.csproj" />
+  <Project Path="wumpus/wumpus.csproj" />
+</Solution>
