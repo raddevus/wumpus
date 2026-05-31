@@ -25,7 +25,7 @@ class Game{
       for (int x = 1; x <= roomCount;x++){
          allRooms.Add(x);
       }
-      DisplayRooms(allRooms);
+
       // mix them up
       Random rnd = new();
       int counter = 0;
@@ -34,36 +34,51 @@ class Game{
          var result = allRooms.Remove(randVal);
          if (result){
             Rooms.Add(randVal);
-
-         switch (counter++){
-            case int n when n >= 0 && n <=4:{
-               Outer.Add(randVal);
-               break;
-            } 
-            case int n when n >= 5 && n <= 9:{
-               Inner.Add(randVal);
-               break;
-            } 
-            case int n when n >= 10 && n <= 19:{
-               Middle.Add(randVal);
-               break;
-            } 
-         }
+            switch (counter++){
+               case int n when n >= 0 && n <=4:{
+                  Outer.Add(randVal);
+                  break;
+               } 
+               case int n when n >= 5 && n <= 9:{
+                  Inner.Add(randVal);
+                  break;
+               } 
+               case int n when n >= 10 && n <= 19:{
+                  Middle.Add(randVal);
+                  break;
+               } 
+            }
          }
 
       }
-      //fill room connections / locations
-      // 1. There are 5 outer rooms, 5 inner rooms and 10 middle rooms
-      for(int x=0; x<5;x++){
-
       DisplayRooms(Rooms);
-      }
    }
    
    private void DisplayRooms(List<int> rooms){
 
       string roomList = string.Empty;
-      foreach (int x in rooms){
+/*      foreach (int x in rooms){
+         roomList += $"{x},";
+      }
+
+      Console.WriteLine($"{roomList}");
+*/
+      roomList = string.Empty;
+      foreach (int x in Outer){
+         roomList += $"{x},";
+      }
+
+      Console.WriteLine($"{roomList}");
+
+      roomList = string.Empty;
+      foreach (int x in Middle){
+         roomList += $"{x},";
+      }
+
+      Console.WriteLine($"{roomList}");
+   
+      roomList = string.Empty;
+      foreach (int x in Inner){
          roomList += $"{x},";
       }
 
