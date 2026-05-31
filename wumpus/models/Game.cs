@@ -9,6 +9,7 @@ class Game{
    private readonly int MIDDLE_LAYER_SIZE;
    public int WumpusLoc{get;set;}
    public int PlayerLoc{get;set;}
+   private RoomLayer currentLayer;
    public List<int> Bats{get;set;} = new();
    public const int TOTAL_TRAPS = 2;
    public List<int> Traps {get;set;} = new();
@@ -16,6 +17,12 @@ class Game{
    private List<int> Outer = new();
    private List<int> Inner = new();
    private List<int> Middle = new();
+   
+   private enum RoomLayer{
+      outer,
+      middle,
+      inner
+   }
 
    public Game(int? outerLayerSize = 5){
       //initialize the game
@@ -28,6 +35,16 @@ class Game{
       Console.WriteLine("Setting locations of game objects & player");
       SetRandomLocations();
       DisplayLocations();
+      CheckPlayerLoc();
+      CheckForHazards();
+   }
+
+   private void CheckPlayerLoc(){
+      Console.WriteLine("You are in room {PlayerLoc}.");
+      Console.WriteLine("Tunnels lead to {}");
+   }
+
+   private void CheckForHazards(){
    }
 
    private void SetRandomLocations(){
