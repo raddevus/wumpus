@@ -40,11 +40,53 @@ class Game{
    }
 
    private void CheckPlayerLoc(){
-      Console.WriteLine("You are in room {PlayerLoc}.");
-      Console.WriteLine("Tunnels lead to {}");
+      Console.WriteLine($"You are in room {PlayerLoc}.");
+      Console.WriteLine($"Tunnels lead to {string.Join(",",GetConnectedRooms(PlayerLoc))}");
    }
 
+   
    private void CheckForHazards(){
+   }
+
+   private List<int> GetConnectedRooms(int location){
+      var currentLayer = GetRoomLayer(location);
+      Console.WriteLine($"PlayerLoc currentLayer: {currentLayer}");
+      List<int> connectedRooms = new();
+      var roomIndex = -1;
+      switch (currentLayer)
+      {
+         // Inner and Outer work the 
+         case RoomLayer.inner:
+         case RoomLayer.outer:{
+            roomIndex = GetRoomIndex(location);
+            var left = roomIndex -1;
+            if (left < 0){ left = OUTER_LAYER_SIZE-1;}
+            var right = roomIndex +1;
+            if (right >= OUTER_LAYER_SIZE){ right = 0;}
+            Console.WriteLine($"roomIndex: {roomIndex} left: {left} right: {right}");            
+            if (currentLayer == RoomLayer.inner){
+               connectedRooms.Add(Inner.ToArray()[left]);
+               connectedRooms.Add(Inner.ToArray()[right]);
+               return connectedRooms;
+            }
+            connectedRooms.Add(Outer.ToArray()[left]);
+            connectedRooms.Add(Outer.ToArray()[right]);
+            return connectedRooms;
+            
+            break;
+         }
+ /*        case RoomLayer.middle:{
+            roomIndex = GetRoomIndex(location);
+            var left = roomIndex -1;
+            if (left < 0){ left = OUTER_LAYER_SIZE;}
+            var right = roomIndex +1;
+            if (right >= OUTER_LAYER_SIZE){ right = 0;}
+            
+            break;
+         }
+  */       
+      }
+      return connectedRooms;
    }
 
    private RoomLayer GetRoomLayer(int location){
@@ -52,10 +94,33 @@ class Game{
       // This is part of determining how the bats & player can move
       if (Outer.Contains(location)){return RoomLayer.outer;}
       if (Inner.Contains(location)){return RoomLayer.inner;}
-      if (Middle.Contains(location)){return RoomLayer.inner;}
+      if (Middle.Contains(location)){return RoomLayer.middle;}
       // This last return will NOT ever be hit
       return RoomLayer.inner;
    }
+
+   private int GetRoomIndex(int location){
+      // Calculates the layer that the room is in
+      // This is part of determining how the bats & player can move
+      if (Outer.Contains(location)){
+         for (int i =0;i<Outer.Count;i++){
+            if (Outer.ToArray()[i] == location){ return i;}
+         }
+      }
+      if (Inner.Contains(location)){
+         for (int i =0;i<Inner.Count;i++){
+            if (Inner.ToArray()[i] == location){ return i;}
+         }
+      }
+      if (Middle.Contains(location)){
+         for (int i =0;i<Middle.Count;i++){
+            if (Middle.ToArray()[i] == location){ return i;}
+         }
+      }
+      // this last return will never be hit
+      return -1;
+   }
+
    private void SetRandomLocations(){
       Random rnd = new();
       // Set Bat's initial location
