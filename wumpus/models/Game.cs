@@ -16,10 +16,10 @@ class Game{
    private List<int> Inner = new();
    private List<int> Middle = new();
 
-   public Game(int outerLayerSize = 5){
+   public Game(int? outerLayerSize = 5){
       //initialize the game
       //Set the total number of rooms based on layer sizes
-      OUTER_LAYER_SIZE = outerLayerSize;
+      OUTER_LAYER_SIZE = outerLayerSize ?? 5;
       MIDDLE_LAYER_SIZE = OUTER_LAYER_SIZE * 2;
       roomCount = 2 * MIDDLE_LAYER_SIZE;
       Console.WriteLine("Starting game...");
