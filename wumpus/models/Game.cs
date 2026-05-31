@@ -10,7 +10,8 @@ class Game{
    public int WumpusLoc{get;set;}
    public int PlayerLoc{get;set;}
    public int BatLoc{get;set;}
-   public int[] Traps {get;set;} = new int[2];
+   public const int TOTAL_TRAPS = 2;
+   public List<int> Traps {get;set;} = new();
    public List<int> Rooms  = new();
    private List<int> Outer = new();
    private List<int> Inner = new();
@@ -24,6 +25,32 @@ class Game{
       roomCount = 2 * MIDDLE_LAYER_SIZE;
       Console.WriteLine("Starting game...");
       RandomizeRooms();
+      Console.WriteLine("Setting locations of game objects & player");
+      SetRandomLocations();
+      DisplayLocations();
+   }
+
+   private void SetRandomLocations(){
+      Random rnd = new();
+      // Set Bat's initial location
+      BatLoc = rnd.Next(1,roomCount+1);
+      // Set Trap locations - 2 of them - can't be the same as the bat or other trap
+      for (int traps =0; traps < TOTAL_TRAPS; traps++){
+         while (Traps.Count() <= traps){
+            var loc = rnd.Next(1, roomCount+1);
+            if (BatLoc == loc){continue;} // it was same as bat location so try again
+            if (!Traps.Contains(loc)){
+               Traps.Add(loc);
+            }
+         }
+      }
+      PlayerLoc = rnd.Next(1, roomCount+1);
+   }
+
+   private void DisplayLocations(){
+      Console.WriteLine($"Bat location: {BatLoc}");
+      Console.WriteLine($"Player location: {PlayerLoc}");
+      Console.WriteLine($"Trap locations: {string.Join(",",Traps)}");
    }
 
    private void RandomizeRooms(){
