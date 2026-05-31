@@ -47,10 +47,14 @@ class Game{
    private void CheckForHazards(){
    }
 
-   private RoomLayer CalculateRoomLayer(int location){
+   private RoomLayer GetRoomLayer(int location){
       // Calculates the layer that the room is in
       // This is part of determining how the bats & player can move
-     return RoomLayer.outer;
+      if (Outer.Contains(location)){return RoomLayer.outer;}
+      if (Inner.Contains(location)){return RoomLayer.inner;}
+      if (Middle.Contains(location)){return RoomLayer.inner;}
+      // This last return will NOT ever be hit
+      return RoomLayer.inner;
    }
    private void SetRandomLocations(){
       Random rnd = new();
