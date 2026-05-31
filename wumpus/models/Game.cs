@@ -34,17 +34,22 @@ class Game{
       Random rnd = new();
       // Set Bat's initial location
       BatLoc = rnd.Next(1,roomCount+1);
+   
+      // Setup Rule: The Player may be initially located at the same
+      // room as the bat, but neither bat nor player may be 
+      // located initially in a trap room
+      PlayerLoc = rnd.Next(1, roomCount+1);
+
       // Set Trap locations - 2 of them - can't be the same as the bat or other trap
       for (int traps =0; traps < TOTAL_TRAPS; traps++){
          while (Traps.Count() <= traps){
             var loc = rnd.Next(1, roomCount+1);
-            if (BatLoc == loc){Console.WriteLine("Oops! same location!"); continue;} // it was same as bat location so try again
+            if (BatLoc == loc || PlayerLoc == loc){Console.WriteLine("Oops! same location!"); continue;} // it was same as bat location so try again
             if (!Traps.Contains(loc)){
                Traps.Add(loc);
             }
          }
       }
-      PlayerLoc = rnd.Next(1, roomCount+1);
    }
 
    private void DisplayLocations(){
