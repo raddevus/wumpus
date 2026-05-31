@@ -3,7 +3,10 @@ namespace wumpus;
 
 class Game{
    // Loc are simply the room numbers (1 to roomCount)
-   private int roomCount = 20;
+   private int roomCount;
+   // The outer and inner layer sizes will always be the same
+   private const int OUTER_LAYER_SIZE = 1;
+   private readonly int MIDDLE_LAYER_SIZE = OUTER_LAYER_SIZE * 2;
    public int WumpusLoc{get;set;}
    public int PlayerLoc{get;set;}
    public int BatLoc{get;set;}
@@ -15,6 +18,8 @@ class Game{
 
    public Game(){
       //initialize the game
+      //Set the total number of rooms based on layer sizes
+      roomCount = 2 * MIDDLE_LAYER_SIZE;
       Console.WriteLine("Starting game...");
       RandomizeRooms();
    }
@@ -35,15 +40,15 @@ class Game{
          if (result){
             Rooms.Add(randVal);
             switch (counter++){
-               case int n when n >= 0 && n <=4:{
+               case int n when n >= 0 && n <= OUTER_LAYER_SIZE -1:{
                   Outer.Add(randVal);
                   break;
                } 
-               case int n when n >= 5 && n <= 9:{
+               case int n when n >= OUTER_LAYER_SIZE && n <= (OUTER_LAYER_SIZE*2)-1:{
                   Inner.Add(randVal);
                   break;
                } 
-               case int n when n >= 10 && n <= 19:{
+               case int n when n >= (OUTER_LAYER_SIZE*2) && n <= (roomCount -1 ):{
                   Middle.Add(randVal);
                   break;
                } 
