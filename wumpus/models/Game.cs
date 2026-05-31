@@ -38,7 +38,7 @@ class Game{
       for (int traps =0; traps < TOTAL_TRAPS; traps++){
          while (Traps.Count() <= traps){
             var loc = rnd.Next(1, roomCount+1);
-            if (BatLoc == loc){continue;} // it was same as bat location so try again
+            if (BatLoc == loc){Console.WriteLine("Oops! same location!"); continue;} // it was same as bat location so try again
             if (!Traps.Contains(loc)){
                Traps.Add(loc);
             }
