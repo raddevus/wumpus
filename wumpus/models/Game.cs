@@ -47,6 +47,11 @@ class Game{
    private void CheckForHazards(){
    }
 
+   private RoomLayer CalculateRoomLayer(int location){
+      // Calculates the layer that the room is in
+      // This is part of determining how the bats & player can move
+     return RoomLayer.outer;
+   }
    private void SetRandomLocations(){
       Random rnd = new();
       // Set Bat's initial location
