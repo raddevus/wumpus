@@ -9,7 +9,7 @@ class Game{
    private readonly int MIDDLE_LAYER_SIZE;
    public int WumpusLoc{get;set;}
    public int PlayerLoc{get;set;}
-   public int BatLoc{get;set;}
+   public List<int> Bats{get;set;} = new();
    public const int TOTAL_TRAPS = 2;
    public List<int> Traps {get;set;} = new();
    public List<int> Rooms  = new();
@@ -33,7 +33,12 @@ class Game{
    private void SetRandomLocations(){
       Random rnd = new();
       // Set Bat's initial location
-      BatLoc = rnd.Next(1,roomCount+1);
+      Bats.Add(rnd.Next(1,roomCount+1));
+      // This adds the 2nd bat and insures it's not in same room as 1st one
+      while (Bats.Count() < 2){
+         var batLoc = rnd.Next(1,roomCount+1);
+         if (!Bats.Contains(batLoc)){ Bats.Add(batLoc);}
+      }
    
       // Setup Rule: The Player may be initially located at the same
       // room as the bat, but neither bat nor player may be 
@@ -44,7 +49,7 @@ class Game{
       for (int traps =0; traps < TOTAL_TRAPS; traps++){
          while (Traps.Count() <= traps){
             var loc = rnd.Next(1, roomCount+1);
-            if (BatLoc == loc || PlayerLoc == loc){Console.WriteLine("Oops! same location!"); continue;} // it was same as bat location so try again
+            if (Bats.Contains(loc) || PlayerLoc == loc){Console.WriteLine("Oops! same location!"); continue;} // it was same as bat location so try again
             if (!Traps.Contains(loc)){
                Traps.Add(loc);
             }
@@ -53,7 +58,7 @@ class Game{
    }
 
    private void DisplayLocations(){
-      Console.WriteLine($"Bat location: {BatLoc}");
+      Console.WriteLine($"Bat location: {string.Join(",",Bats)}");
       Console.WriteLine($"Player location: {PlayerLoc}");
       Console.WriteLine($"Trap locations: {string.Join(",",Traps)}");
    }
