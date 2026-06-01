@@ -87,6 +87,14 @@ class Game{
 
             connectedRooms.Add(Middle.ToArray()[left]);
             connectedRooms.Add(Middle.ToArray()[right]);
+            if (roomIndex % 2 == 0){
+               var targetIdx = (roomIndex / 2);
+               connectedRooms.Add(Outer.ToArray()[targetIdx]);
+            }
+            else{
+               var targetIdx = (roomIndex / 2) - 1;
+               connectedRooms.Add(Inner.ToArray()[targetIdx]);
+            }
            return connectedRooms;   
             break;
          }
