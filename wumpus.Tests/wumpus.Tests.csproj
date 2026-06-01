@@ -18,6 +18,10 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+ <ItemGroup>
+  <None Update="5x10x5.dat" CopyToOutputDirectory="Always" />
+ </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\wumpus\wumpus.csproj" />
   </ItemGroup>

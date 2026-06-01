@@ -1,7 +1,7 @@
 
 namespace wumpus;
 
-class Game{
+public class Game{
    // Loc are simply the room numbers (1 to roomCount)
    private int roomCount;
    // The outer and inner layer sizes will always be the same
