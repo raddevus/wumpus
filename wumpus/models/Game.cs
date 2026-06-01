@@ -169,7 +169,7 @@ class Game{
       Console.WriteLine($"Trap locations: {string.Join(",",Traps)}");
    }
 
-   private void RandomizeRooms(){
+   private void RandomizeRooms(bool isLoadFromFile=false, string? roomFile=null){
       List<int> allRooms = new();
       // add all rooms
       for (int x = 1; x <= roomCount;x++){
