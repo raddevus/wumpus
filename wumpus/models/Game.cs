@@ -24,14 +24,14 @@ class Game{
       inner
    }
 
-   public Game(int? outerLayerSize = 5){
+   public Game(int? outerLayerSize = 5, string? roomFile=null){
       //initialize the game
       //Set the total number of rooms based on layer sizes
       OUTER_LAYER_SIZE = outerLayerSize ?? 5;
       MIDDLE_LAYER_SIZE = OUTER_LAYER_SIZE * 2;
       roomCount = 2 * MIDDLE_LAYER_SIZE;
       Console.WriteLine("Starting game...");
-      RandomizeRooms();
+      RandomizeRooms(roomFile);
       Console.WriteLine("Setting locations of game objects & player");
       SetRandomLocations();
       DisplayLocations();
@@ -169,7 +169,40 @@ class Game{
       Console.WriteLine($"Trap locations: {string.Join(",",Traps)}");
    }
 
-   private void RandomizeRooms(bool isLoadFromFile=false, string? roomFile=null){
+   async private void RandomizeRooms(string? roomFile=null){
+      // Load Rooms (layers) from file
+      if (roomFile != null){
+        string [] allFileRooms = File.ReadAllLines(roomFile);
+        try{
+           var lineCount = 0;
+           foreach (string line in allFileRooms){
+              string [] rooms = line.Split(",",StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+              foreach (string room in rooms){
+                 switch (lineCount){
+                    case 0:{
+                       Outer.Add(Convert.ToInt32(room));
+                       break;
+                    }
+                   case 1:{
+                      Middle.Add(Convert.ToInt32(room));
+                      break;
+                   }
+                   case 2:{
+                      Inner.Add(Convert.ToInt32(room));
+                      break;
+                   }
+                 }
+              }
+              lineCount++;
+           }
+           // Rooms are loaded from file, return & do no more work in this method
+           return;
+        }
+        catch(Exception ex){
+           Console.WriteLine($"Error loading file! {ex.Message}");
+        }
+
+      }
       List<int> allRooms = new();
       // add all rooms
       for (int x = 1; x <= roomCount;x++){
