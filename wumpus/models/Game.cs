@@ -67,7 +67,7 @@ public class Game{
             if (currentLayer == RoomLayer.inner){
                connectedRooms.Add(Inner.ToArray()[left]);
                connectedRooms.Add(Inner.ToArray()[right]);
-               var targetIdx = (roomIndex * 2)-1 >= MIDDLE_LAYER_SIZE ? MIDDLE_LAYER_SIZE -1 : (roomIndex * 2)-1; 
+               var targetIdx = (roomIndex * 2)+1 >= MIDDLE_LAYER_SIZE ? MIDDLE_LAYER_SIZE -1 : (roomIndex * 2)+1; 
                connectedRooms.Add(Middle.ToArray()[targetIdx] ); 
                return connectedRooms;
             }
