@@ -78,16 +78,18 @@ class Game{
             
             break;
          }
- /*        case RoomLayer.middle:{
+        case RoomLayer.middle:{
             roomIndex = GetRoomIndex(location);
             var left = roomIndex -1;
-            if (left < 0){ left = OUTER_LAYER_SIZE;}
+            if (left < 0){ left = MIDDLE_LAYER_SIZE-1;}
             var right = roomIndex +1;
-            if (right >= OUTER_LAYER_SIZE){ right = 0;}
-            
+            if (right >= MIDDLE_LAYER_SIZE){ right = 0;}
+
+            connectedRooms.Add(Middle.ToArray()[left]);
+            connectedRooms.Add(Middle.ToArray()[right]);
+           return connectedRooms;   
             break;
          }
-  */       
       }
       return connectedRooms;
    }
