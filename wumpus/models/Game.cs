@@ -92,7 +92,9 @@ class Game{
                connectedRooms.Add(Outer.ToArray()[targetIdx]);
             }
             else{
-               var targetIdx = (roomIndex / 2) - 1;
+               // 1 3 5 7 9
+               var targetIdx = ((roomIndex +1)/2) -1;
+               Console.WriteLine($"targetIdx: {targetIdx}");
                connectedRooms.Add(Inner.ToArray()[targetIdx]);
             }
            return connectedRooms;   
