@@ -83,4 +83,31 @@ public class RoomConnectionTests
       g.PlayerLoc = 20;
       g.CheckPlayerLoc();
     }
+
+//    [Fact]
+    public void TestAllPlayerLocs3x6()
+    {
+      // ###########################
+      // Tests every room in the file
+      // ###########################
+      var rootPath = AppContext.BaseDirectory;
+      var targetFile = "3x6.dat";
+      Game g = new (3, Path.Combine(rootPath,targetFile));
+      g.PlayerLoc = 1;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 2;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 3;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 4;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 5;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 6;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 7;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 8;
+      g.CheckPlayerLoc();
+    }
 }
