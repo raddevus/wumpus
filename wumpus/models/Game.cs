@@ -39,7 +39,7 @@ public class Game{
       CheckForHazards();
    }
 
-   private void CheckPlayerLoc(){
+   public void CheckPlayerLoc(){
       Console.WriteLine($"You are in room {PlayerLoc}.");
       Console.WriteLine($"Tunnels lead to {string.Join(",",GetConnectedRooms(PlayerLoc))}");
    }
