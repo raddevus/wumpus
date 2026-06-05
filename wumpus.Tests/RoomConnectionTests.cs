@@ -84,7 +84,7 @@ public class RoomConnectionTests
       g.CheckPlayerLoc();
     }
 
-//    [Fact]
+    [Fact]
     public void TestAllPlayerLocs3x6()
     {
       // ###########################
@@ -109,5 +109,14 @@ public class RoomConnectionTests
       g.CheckPlayerLoc();
       g.PlayerLoc = 8;
       g.CheckPlayerLoc();
+      g.PlayerLoc = 9;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 10;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 11;
+      g.CheckPlayerLoc();
+      g.PlayerLoc = 12;
+      g.CheckPlayerLoc();
+
     }
 }

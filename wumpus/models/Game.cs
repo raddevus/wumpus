@@ -172,8 +172,8 @@ public class Game{
    async private void RandomizeRooms(string? roomFile=null){
       // Load Rooms (layers) from file
       if (roomFile != null){
-        string [] allFileRooms = File.ReadAllLines(roomFile);
         try{
+           string [] allFileRooms = File.ReadAllLines(roomFile);
            var lineCount = 0;
            foreach (string line in allFileRooms){
               string [] rooms = line.Split(",",StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
