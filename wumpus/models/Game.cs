@@ -3,7 +3,7 @@ namespace wumpus;
 
 public class Game{
    // Loc are simply the room numbers (1 to roomCount)
-   private int roomCount;
+   public int roomCount{get;}
    // The outer and inner layer sizes will always be the same
    private readonly int OUTER_LAYER_SIZE;
    private readonly int MIDDLE_LAYER_SIZE;
@@ -44,7 +44,16 @@ public class Game{
       Console.WriteLine($"Tunnels lead to {string.Join(",",GetConnectedRooms(PlayerLoc))}");
    }
 
-   
+
+   public bool MovePlayerToRoom(int targetRoom){
+      if (GetConnectedRooms(PlayerLoc).Contains(targetRoom)){
+         PlayerLoc = targetRoom;
+         CheckPlayerLoc();
+         return true;
+      }
+      return false;
+   }
+
    private void CheckForHazards(){
    }
 

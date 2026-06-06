@@ -16,11 +16,25 @@ bool exitGame = false;
 while (!exitGame){
    
    var userChoice = GetUserChoice();
-   if (userChoice == -1){
-      Environment.Exit(0);
+   switch (userChoice){
+      case -1:{
+         Environment.Exit(0);
+         break;
+      }
+      case 0:{
+         // user made invalid choice, try again
+         break;
+      }
+      case int n when n > 0 && n < g.roomCount :{
+         Console.WriteLine($"roomCount: {g.roomCount} - choice: {userChoice}");
+//         g.PlayerLoc
+         break;
+      }
+      default:{
+         Console.WriteLine("It seems like you've entered an invalid room number.");
+         break;
+      }
    }
-
-
 }
 
 int GetUserChoice(){
