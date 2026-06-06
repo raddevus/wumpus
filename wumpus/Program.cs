@@ -2,6 +2,8 @@
 
 Console.WriteLine("Hello, World!");
 int? outerLayerSize = null;
+string roomFile = null;
+
 if (args.Count() > 0){
    string output = string.Empty;
    foreach (string s in args){
@@ -9,8 +11,12 @@ if (args.Count() > 0){
    }
    Console.WriteLine($"args: {output}");
    outerLayerSize = Convert.ToInt32(args[0]);
+   roomFile = args[1];
 }
-Game g = new(outerLayerSize);
+// Now you can start the game with a path to a roomFile
+// If the file is loaded from args[1] then it will be used as the 
+// set of rooms in the game
+Game g = new(outerLayerSize, roomFile);
 bool exitGame = false;
 
 while (!exitGame){
