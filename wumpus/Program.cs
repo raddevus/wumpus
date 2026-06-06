@@ -27,11 +27,15 @@ while (!exitGame){
       }
       case int n when n > 0 && n < g.roomCount :{
          Console.WriteLine($"roomCount: {g.roomCount} - choice: {userChoice}");
-//         g.PlayerLoc
+         if (!g.MovePlayerToRoom(userChoice)){
+            Console.WriteLine($"{userChoice} is not a valid room from here.");
+            g.CheckPlayerLoc();
+         }
          break;
       }
       default:{
          Console.WriteLine("It seems like you've entered an invalid room number.");
+         g.CheckPlayerLoc();
          break;
       }
    }
