@@ -42,7 +42,8 @@ public class Game{
    public void CheckPlayerLoc(){
       Console.WriteLine("####### Location ########");
       Console.WriteLine($"### You are in room {PlayerLoc}. ###");
-      Console.WriteLine($"Tunnels lead to {string.Join(",",GetConnectedRooms(PlayerLoc))}");
+      Console.WriteLine("******* Tunnels *********");
+      Console.WriteLine($"[=== Tunnels lead to {string.Join(",",GetConnectedRooms(PlayerLoc))} ===]");
    }
 
    public bool MovePlayerToRoom(int targetRoom){

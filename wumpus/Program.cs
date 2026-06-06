@@ -11,7 +11,9 @@ if (args.Count() > 0){
    }
    Console.WriteLine($"args: {output}");
    outerLayerSize = Convert.ToInt32(args[0]);
-   roomFile = args[1];
+   if (args.Count() > 1){
+      roomFile = args[1];
+   }
 }
 // Now you can start the game with a path to a roomFile
 // If the file is loaded from args[1] then it will be used as the 
@@ -31,7 +33,7 @@ while (!exitGame){
          // user made invalid choice, try again
          break;
       }
-      case int n when n > 0 && n < g.roomCount :{
+      case int n when n > 0 && n <= g.roomCount :{
          Console.WriteLine($"roomCount: {g.roomCount} - choice: {userChoice}");
          if (!g.MovePlayerToRoom(userChoice)){
             Console.WriteLine($"{userChoice} is not a valid room from here.");
